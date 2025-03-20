@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- <script src="../config.js"></script> -->
+	<script type="module" src="../config.js"></script>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta property='og:type' content="website" />
+	<meta property='og:site_name' content="TONGITS" />
+	<meta property='og:title' content="Tongits Pinoy send you 100 free Pcoins!" />
+	<meta property='og:description' content="Tongits Pinoy | The Tongits Game knows Filipinos best" />
+	<!--
+	<meta property='og:image'
+		content="https://tongits-04jhb35zlo-uploads-tmp.oss-ap-southeast-6.aliyuncs.com/pmt_test/share/hall/share_3.png" />
+	-->
+	<meta property='og:image' content="https://upload-cdn.tongitspinoy.com/pmt/share/hall/share_3.png" />
+	<meta property="og:image:type" content="image/png" />
+	<meta property="og:image:width" content="1400" />
+	<meta property="og:image:height" content="700" />
+	<link rel="icon" href="../../logo.png">
+	<title>TONGITS</title>
+</head>
+
+<body>
+</body>
+
+<script type="module">
+	import { getBaseUrl, getQueryString } from '../config.js';
+
+	function onOpenThisPage() {
+		var PMT_URL = getBaseUrl()
+		var url = PMT_URL + "/playerShare?";
+
+		var invite = getQueryString("invite");
+		if (invite) {
+			url = url + "invite=" + invite;
+		}
+
+		var token = getQueryString("token");
+		if (token) {
+			url = url + "&token=" + token;
+		}
+
+		location.href = url;
+	}
+
+	// 打开这个html的时候，调用onOpenThisPage函数，函数后面不需要带括号
+	window.onload = onOpenThisPage;
+</script>
+
+</html>
