@@ -70,40 +70,28 @@ export function onRequest(context) {
 }
 
 async function handleRequest(context) {
-        if (context.request.method === "POST") {
+    if (context.request.method === "POST") {
         try {
             // 解析 JSON 数据
             const body = await context.request.json();
             // 返回包含 user 参数的响应
             const encrypted = AesManager.encrypt(body);
-            const req={postData:encrypted}
+            const req = {postData: encrypted}
             // return new Response(JSON.stringify(req));测试加密结果
-            try {
-                const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/checkCustomerLink', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json; charset=UTF-8',
-                    },
-                    body: JSON.stringify({
-                        req
-                    })
-                });
-                // 解析响应数据
-                const data = await response.json();
-                console.log("---")
-                console.log(data)
-                console.log("---")
-                return new Response(data);
-            } catch (error) {
-                return new Response(error);
-            }
-
-
-
-
-            return new Response(JSON.stringify(req));
+            const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/checkCustomerLink', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify({
+                    req
+                })
+            });
+            // 解析响应数据
+            const data = await response.json();
+            return new Response(data);
         } catch (error) {
-            return new Response(error, { status: 400 });
+            return new Response(JSON.stringify(error));
         }
     }
 
