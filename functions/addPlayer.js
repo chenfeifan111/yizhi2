@@ -81,7 +81,8 @@ async function handleRequest(context) {
             const req={postData:encrypted}
             // return new Response(JSON.stringify(req));测试加密结果
             try {
-                const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/recordClickCnt', {
+                // const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/recordClickCnt', {
+                const response = await fetch(' http://uerida.natappfree.cc/shareMgr/recordClickCnt', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
