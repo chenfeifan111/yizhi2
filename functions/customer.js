@@ -76,7 +76,8 @@ async function handleRequest(context) {
             const body = await context.request.json();
             // 返回包含 user 参数的响应
             const encrypted = AesManager.encrypt(body);
-            return new Response(encrypted);
+            const json={"postData":encrypted}
+            return new Response(json);
         } catch (error) {
             return new Response(error, { status: 400 });
         }

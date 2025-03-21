@@ -8,7 +8,7 @@ const API = {
 }
 // * 验证客服分享链接是否有效
 export const checkCustomerLinkApi = (data) =>
-// request.post(API.checkCustomerLink, data)
+    // request.post(API.checkCustomerLink, data)
     fetch('https://yizhi2.pages.dev/customer', {
         method: 'POST', // HTTP 方法
         headers: {
