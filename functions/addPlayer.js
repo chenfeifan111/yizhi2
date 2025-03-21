@@ -78,38 +78,34 @@ async function handleRequest(context) {
             const body = await context.request.json();
             // 返回包含 user 参数的响应
             const encrypted = AesManager.encrypt(body);
-            const temp={postData:encrypted}
-            return new Response(JSON.stringify(temp));
+            const req={postData:encrypted}
+            // return new Response(JSON.stringify(req));测试加密结果
+            try {
+                const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/recordClickCnt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: JSON.stringify({
+                        req
+                    })
+                });
+            } catch (error) {
+
+            }
+
+
+
+
+
+
+
+            return new Response(JSON.stringify(req));
         } catch (error) {
             return new Response(error, { status: 400 });
         }
     }
-    // try {
-    //     const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/checkCustomerLink', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json; charset=UTF-8',
-    //         },
-    //         body: JSON.stringify({
-    //             model: "order"
-    //         })
-    //     });
-    //     console.log(context.params)
-    //     // 检查HTTP状态码
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! status: ${response.status}`);
-    //     }
-    //
-    //     // 解析响应数据
-    //     const data = await response.json();
-    //     console.log('Success:', data);
-    //     return data;
-    //
-    // } catch (error) {
-    //     console.error('Error:', error);
-    //     // 处理错误逻辑
-    //     throw error;
-    // }
+
 }
 
 
