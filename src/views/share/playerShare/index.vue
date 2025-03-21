@@ -28,6 +28,7 @@
             src="/images/playerShare/logo_pinoy.png"
             alt="btn_open"
             style="width: 32%; padding-left: 1%"
+            @click="goToDownload"
           />
           <img
             src="/images/playerShare/loading_android.png"
@@ -52,6 +53,7 @@
             src="/images/playerShare/logo_mania.png"
             alt="btn_open"
             style="width: 33%; padding-left: 1%"
+            @click="goToDownload"
           />
           <img
             src="/images/playerShare/loading_ios.png"
@@ -235,9 +237,9 @@ const onClick = () => {
 
 const { toClipboard } = useClipboard();
 const copyContent = () => {
-  toClipboard(sInviteCode.value).catch(() => {
-    showDialog({ message: "Error! Please open our website correctly!" });
-  });
+  // toClipboard(sInviteCode.value).catch(() => {
+  //   showDialog({ message: "Error! Please open our website correctly!" });
+  // });
   onClick();
 };
 
