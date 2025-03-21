@@ -90,6 +90,9 @@ async function handleRequest(context) {
                 });
                 // 解析响应数据
                 const data = await response.json();
+                console.log("---")
+                console.log(data)
+                console.log("---")
                 return new Response(data);
             } catch (error) {
                 return new Response(error);
