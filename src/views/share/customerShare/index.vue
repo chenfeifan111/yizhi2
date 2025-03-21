@@ -40,13 +40,16 @@ const onCheckCustomerLink = async () => {
 		sCustomerId: sCustomerId.value || "",
 		sCustomerName: sCustomerName.value || "",
 	};
-	await checkCustomerLinkApi(reqParam).then(res=>{
-    console.log(res)
-  }).catch((code) => {
-    if (code !== 200) {
-      showDialog({ message: "The activity link has expired."})
-    }
-  });
+	// await checkCustomerLinkApi(reqParam).then(res=>{
+  //   console.log(res)
+  // }).catch((code) => {
+  //   if (code !== 200) {
+  //     showDialog({ message: "The activity link has expired."})
+  //   }
+  // });
+  await checkCustomerLinkApi(reqParam)
+
+
 };
 
 const { toClipboard } = useClipboard();
