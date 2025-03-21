@@ -1,5 +1,3 @@
-// import {request} from '@/utils/http'
-
 const API = {
     // checkCustomerLink: '/shareMgr/checkCustomerLink',
     // addPlayerClickCnt: '/shareMgr/recordClickCnt'

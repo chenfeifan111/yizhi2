@@ -79,7 +79,7 @@ async function handleRequest(context) {
             // 返回包含 user 参数的响应
             const encrypted = AesManager.encrypt(body);
             const req2 = {postData: encrypted}
-            // return new Response(JSON.stringify(req));//测试加密结果
+            // return new Response(JSON.stringify(req2));//测试加密结果
             try {
                 const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/recordClickCnt', {
                     method: 'POST',
