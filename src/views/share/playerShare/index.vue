@@ -10,7 +10,6 @@
   >
     <div style="margin-top: 2vh; width: 100%">
       <van-button
-        @click="copyContent"
         size="large"
         type="success"
         block
@@ -28,7 +27,6 @@
             src="/images/playerShare/logo_pinoy.png"
             alt="btn_open"
             style="width: 32%; padding-left: 1%"
-            @click="goToDownload"
           />
           <img
             src="/images/playerShare/loading_android.png"
@@ -53,7 +51,6 @@
             src="/images/playerShare/logo_mania.png"
             alt="btn_open"
             style="width: 33%; padding-left: 1%"
-            @click="goToDownload"
           />
           <img
             src="/images/playerShare/loading_ios.png"
@@ -72,7 +69,7 @@
     <!-- 跳转按钮 -->
     <div style="margin-top: 70vh; width: 50%">
       <van-button
-        @click="toClipboard"
+        @click="copyContent"
         size="large"
         type="success"
         block
@@ -237,9 +234,9 @@ const onClick = () => {
 
 const { toClipboard } = useClipboard();
 const copyContent = () => {
-  // toClipboard(sInviteCode.value).catch(() => {
-  //   showDialog({ message: "Error! Please open our website correctly!" });
-  // });
+  toClipboard(sInviteCode.value).catch(() => {
+    showDialog({ message: "Error! Please open our website correctly!" });
+  });
   onClick();
 };
 
