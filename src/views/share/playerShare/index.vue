@@ -234,11 +234,17 @@ const onClick = () => {
 
 const { toClipboard } = useClipboard();
 const copyContent = () => {
-  // toClipboard(sInviteCode.value).catch(() => {
-  //   showDialog({ message: "Error! Please open our website correctly!" });
-  // });
-  // onClick();
-  goToDownload()
+  toClipboard(sInviteCode.value).catch(() => {
+    showDialog({ message: "Error! Please open our website correctly!" });
+  });
+  onClick();
+
+  // const isAndroid=deviceType()
+  // if (!isAndroid){
+  //   goToDownload()
+  // }else {
+  //   onClick();
+  // }
 };
 
 // ----------------------------------------------------------------------- 子组件start
