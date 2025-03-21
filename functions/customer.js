@@ -69,9 +69,9 @@ export function onRequest(context) {
     return handleRequest(context)
 }
 
-addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
-})
+// addEventListener('fetch', event => {
+//     event.respondWith(handleRequest(event.request))
+// })
 
 async function handleRequest(context) {
     if (context.request.method === "POST") {
