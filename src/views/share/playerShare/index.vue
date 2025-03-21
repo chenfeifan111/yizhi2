@@ -234,10 +234,11 @@ const onClick = () => {
 
 const { toClipboard } = useClipboard();
 const copyContent = () => {
-  toClipboard(sInviteCode.value).catch(() => {
-    showDialog({ message: "Error! Please open our website correctly!" });
-  });
-  onClick();
+  // toClipboard(sInviteCode.value).catch(() => {
+  //   showDialog({ message: "Error! Please open our website correctly!" });
+  // });
+  // onClick();
+  goToDownload()
 };
 
 // ----------------------------------------------------------------------- 子组件start
