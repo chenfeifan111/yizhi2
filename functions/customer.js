@@ -84,15 +84,13 @@ async function handleRequest(context) {
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8',
                 },
-                body: JSON.stringify({
-                    req
-                })
+                body: JSON.stringify({"sCustomerId":"","sCustomerName":""})
             }).then(response => response.json())
                 .then(data => {
                     return new Response(data);
             })
         } catch (error) {
-            return new Response(JSON.stringify({err: error}));
+            return new Response(JSON.stringify({err: "err"}));
         }
     }
 
