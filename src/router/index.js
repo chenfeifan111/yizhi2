@@ -63,6 +63,18 @@ const router = createRouter({
       component: () => import("../views/share/playerShare/index.vue"),
       meta: { showHeaderFooter: false },
     },
+    {
+      path: "/customerShare",
+      name: "customerShare",
+      component: () => import("../views/share/customerShare/index.vue"),
+      meta: { showHeaderFooter: false },
+    },
+    {
+      path: "/facebookShare",
+      name: "facebookShare",
+      component: () => import("../views/share/facebookShare/index.vue"),
+      meta: { showHeaderFooter: false },
+    },
   ],
 });
 
