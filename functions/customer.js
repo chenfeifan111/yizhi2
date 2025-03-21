@@ -79,7 +79,7 @@ async function handleRequest(context) {
             const req = {postData: encrypted}
             // return new Response(JSON.stringify(req));测试加密结果
             // const response = await fetch('https://prepublish-api.tongitspinoy.com/shareMgr/checkCustomerLink', {
-            const response = await fetch(' http://uerida.natappfree.cc/shareMgr/checkCustomerLink', {
+            const response = await fetch('http://uerida.natappfree.cc/shareMgr/checkCustomerLink', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8',
@@ -92,7 +92,7 @@ async function handleRequest(context) {
             const data = await response.json();
             return new Response(data);
         } catch (error) {
-            return new Response(JSON.stringify(error));
+            return new Response({"err":error});
         }
     }
 
