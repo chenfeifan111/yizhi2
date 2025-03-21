@@ -86,9 +86,7 @@ async function handleRequest(context) {
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
-                    body: JSON.stringify({
-                        req
-                    })
+                    body: JSON.stringify({"postData": "XE42Qob+D5Ci9jf/55odasEtExzHzTY/klk/4EvMpsg="})
                 });
 
                 // 如果返回的响应是 JSON 格式
