@@ -69,10 +69,6 @@ export function onRequest(context) {
     return handleRequest(context)
 }
 
-// addEventListener('fetch', event => {
-//     event.respondWith(handleRequest(event.request))
-// })
-
 async function handleRequest(context) {
     if (context.request.method === "POST") {
         try {
@@ -84,14 +80,12 @@ async function handleRequest(context) {
             // return new Response(JSON.stringify(req));测试加密结果
             try {
                 const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
-                // const response = await fetch('http://8v933i.natappfree.cc/web_client/shareMgr/checkCustomerLink', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
                     body: JSON.stringify({
-                        "sCustomerId": "",
-                        "sCustomerName": ""
+                        req
                     })
                 });
 
@@ -111,7 +105,6 @@ async function handleRequest(context) {
             return new Response(JSON.stringify({err: "参数错误"}));
         }
     }
-
 }
 
 
