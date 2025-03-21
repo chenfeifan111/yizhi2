@@ -78,8 +78,8 @@ async function handleRequest(context) {
             const encrypted = AesManager.encrypt(body);
             const req = {postData: encrypted}
             // return new Response(JSON.stringify(req));测试加密结果
-            const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
-            // fetch('http://uerida.natappfree.cc/shareMgr/checkCustomerLink', {
+            // const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
+            fetch('http://8v933i.natappfree.cc/web_client/shareMgr/checkCustomerLink', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8',
