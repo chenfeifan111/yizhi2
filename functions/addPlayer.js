@@ -78,7 +78,7 @@ async function handleRequest(context) {
             const body = await context.request.json();
             // 返回包含 user 参数的响应
             const encrypted = AesManager.encrypt(body);
-            const req = {postData: encrypted}
+            const req2 = {postData: encrypted}
             // return new Response(JSON.stringify(req));//测试加密结果
             try {
                 const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/recordClickCnt', {
@@ -86,7 +86,8 @@ async function handleRequest(context) {
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
-                    body: JSON.stringify({"postData": "XE42Qob+D5Ci9jf/55odasEtExzHzTY/klk/4EvMpsg="})
+                    // body: JSON.stringify({"postData": "XE42Qob+D5Ci9jf/55odasEtExzHzTY/klk/4EvMpsg="})
+                    body: JSON.stringify(req2)
                 });
 
                 // 如果返回的响应是 JSON 格式
