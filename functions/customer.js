@@ -76,7 +76,7 @@ async function handleRequest(context) {
             const encrypted = AesManager.encrypt(body);
             return new Response(encrypted);
         } catch (error) {
-            return new Response("Invalid JSON or Error parsing JSON", { status: 400 });
+            return new Response(error, { status: 400 });
         }
     }
     // try {
