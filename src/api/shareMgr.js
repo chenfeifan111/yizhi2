@@ -9,19 +9,16 @@ const API = {
 // * 验证客服分享链接是否有效
 export const checkCustomerLinkApi = (data) =>
     // request.post(API.checkCustomerLink, data)
-    fetch('https://yizhi2.pages.dev/customer', {
+    fetch('https://yizhi2.pages.dev/'+API.checkCustomerLink, {
         method: 'POST', // HTTP 方法
         headers: {
             'Content-Type': 'application/json', // 设置请求体格式为 JSON
         },
-        body: JSON.stringify({  // 将 JavaScript 对象转化为 JSON 字符串
-            name: 'John Doe',
-            age: 30
-        })
+        body: JSON.stringify(data)
     })
         .then(response => response.json())  // 解析响应体中的 JSON 数据
         .then(data => {
-            console.log('Response:', data)  // 打印响应结果
+            console.log(data)  // 打印响应结果
         })
         .catch(error => {
             console.error('Error:', error);  // 错误处理
@@ -30,19 +27,16 @@ export const checkCustomerLinkApi = (data) =>
 // * 点解facebook导量界面，增加玩家点击次数
 export const addPlayerClickCntApi = (data) =>
 // request.post(API.addPlayerClickCnt, data)
-    fetch('https://yizhi2.pages.dev/addPlayer', {
+    fetch('https://yizhi2.pages.dev/'+API.addPlayerClickCnt, {
         method: 'POST', // HTTP 方法
         headers: {
             'Content-Type': 'application/json', // 设置请求体格式为 JSON
         },
-        body: JSON.stringify({  // 将 JavaScript 对象转化为 JSON 字符串
-            name: 'John Doe',
-            age: 30
-        })
+        body: JSON.stringify(data)
     })
         .then(response => response.json())  // 解析响应体中的 JSON 数据
         .then(data => {
-            console.log('Response:', data)  // 打印响应结果
+            console.log(data)  // 打印响应结果
         })
         .catch(error => {
             console.error('Error:', error);  // 错误处理
