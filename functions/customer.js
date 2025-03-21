@@ -69,6 +69,10 @@ export function onRequest(context) {
     return handleRequest(context)
 }
 
+addEventListener('fetch', event => {
+    event.respondWith(handleRequest(event.request))
+})
+
 async function handleRequest(context) {
     if (context.request.method === "POST") {
         try {
@@ -79,16 +83,38 @@ async function handleRequest(context) {
             const req = {postData: encrypted}
             // return new Response(JSON.stringify(req));测试加密结果
             // const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
-            fetch('http://8v933i.natappfree.cc/web_client/shareMgr/checkCustomerLink', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=UTF-8',
-                },
-                body: JSON.stringify({"sCustomerId":"","sCustomerName":""})
-            }).then(response => response.json())
-                .then(data => {
-                    return new Response(data);
-            })
+            try {
+                const response = await fetch('http://8v933i.natappfree.cc/web_client/shareMgr/checkCustomerLink', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: JSON.stringify({
+                        "sCustomerId": "",
+                        "sCustomerName": ""
+                    })
+                });
+
+                // 如果返回的响应是 JSON 格式
+                if (response.ok) {
+                    const data = await response.json();  // 获取响应的 JSON 数据
+                    return new Response(JSON.stringify(data), {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                } else {
+                    return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+                }
+
+            } catch (error) {
+                // 处理错误，返回 500 错误
+                return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+            }
+
+
+
+
+
+
         } catch (error) {
             return new Response(JSON.stringify({err: "err"}));
         }
