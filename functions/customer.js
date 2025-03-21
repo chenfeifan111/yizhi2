@@ -82,9 +82,9 @@ async function handleRequest(context) {
             const encrypted = AesManager.encrypt(body);
             const req = {postData: encrypted}
             // return new Response(JSON.stringify(req));测试加密结果
-            // const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
             try {
-                const response = await fetch('http://8v933i.natappfree.cc/web_client/shareMgr/checkCustomerLink', {
+                const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
+                // const response = await fetch('http://8v933i.natappfree.cc/web_client/shareMgr/checkCustomerLink', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
@@ -104,19 +104,11 @@ async function handleRequest(context) {
                 } else {
                     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
                 }
-
             } catch (error) {
-                // 处理错误，返回 500 错误
                 return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
             }
-
-
-
-
-
-
         } catch (error) {
-            return new Response(JSON.stringify({err: "err"}));
+            return new Response(JSON.stringify({err: "参数错误"}));
         }
     }
 
