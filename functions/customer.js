@@ -135,14 +135,15 @@ map.set("dev","http://localhost:...")
 
 export async function onRequest(context) {
     if (context.request.method === "POST") {
-        const body = await context.request.json()
-        const env=map.get(body.env)//环境
-        if (env==null){//||body.path===""||body.data===null
-            return new Response(JSON.stringify({err: "缺少环境:"+env}));
-        }
-        const url=env+body.path//请求路径
-        const reqData=body.data//实际要请求的数据
-        await precess(url,reqData)
+        // const body = await context.request.json()
+        // const env=map.get(body.env)//环境
+        // if (env==null){//||body.path===""||body.data===null
+        //     return new Response(JSON.stringify({err: "缺少环境:"+env}));
+        // }
+        // const url=env+body.path//请求路径
+        // const reqData=body.data//实际要请求的数据
+        // await precess(url,reqData)
+        return new Response("hello")
     }
 }
 
