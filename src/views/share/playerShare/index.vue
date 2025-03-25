@@ -170,7 +170,8 @@ const canUseUniversalLink = () => {
 };
 
 const goToDownload = () => {
-  let call_back_url = "https://www.tongitspinoy.com/"; // 唤醒app后的回调
+  // let call_back_url = "https://www.tongitspinoy.com/"; // 唤醒app后的回调
+  let call_back_url = "/"; // 唤醒app后的回调
   if (navigator.userAgent.match(/iphone|ipad|ipod/i)) {
     location.href = call_back_url; // 'https://apps.apple.com/us/app/id1507313633'
   } else {
@@ -234,12 +235,13 @@ const onClick = () => {
 
 const { toClipboard } = useClipboard();
 const copyContent = () => {
-  toClipboard(sInviteCode.value).catch(() => {
-    showDialog({ message: "Error! Please open our website correctly!" });
-  });
-  onClick();
+  // toClipboard(sInviteCode.value).catch(() => {
+  //   showDialog({ message: "Error! Please open our website correctly!" });
+  // });
+  // onClick();
+
+  goToDownload()
   // const isAndroid = navigator.userAgent.match(/iphone|ipod|ipad|Android/i) == "Android";
-  // alert(isAndroid)
   // if (!isAndroid){
   //   goToDownload()
   // }else {
