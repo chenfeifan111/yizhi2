@@ -142,7 +142,38 @@ export async function onRequest(context) {
         }
         const url=env+body.path//请求路径
         const reqData=body.data//实际要请求的数据
-        await precess(url,reqData)
+        // await precess(url,reqData)
+
+        const encrypted = AesManager.encrypt(reqData);
+        const req = {postData: encrypted}
+        // return new Response(JSON.stringify(req));测试加密结果
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify({
+                    req
+                })
+            });
+
+            // 如果返回的响应是 JSON 格式
+            if (response.ok) {
+                const data = await response.json();  // 获取响应的 JSON 数据
+                return new Response(JSON.stringify(data), {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            } else {
+                return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+            }
+        } catch (error) {
+            return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+        }
+
+
+
+
     }
 }
 
