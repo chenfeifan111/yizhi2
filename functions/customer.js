@@ -63,78 +63,52 @@
 import {AesManager} from "./aesManager";
 
 
-
-
-
-addEventListener('fetch', event => {
-    event.respondWith(onRequest(event.request, event.env));
-})
-
-async function onRequest(request, env) {
-    const url = new URL(request.url);
-    switch (url.pathname) {
-        case '/message':
-            // 返回环境变量 MY_VARIABLE 的值
-            return new Response(env.main);
-        case '/random':
-            // 返回一个随机的 UUID
-            return new Response(crypto.randomUUID());
-        default:
-            // 如果路径不匹配，返回 404
-            return new Response('Not Found', { status: 404 });
-    }
-}
-
-
-
 /**
  * 原来的飞书测试
  */
-// export function onRequest(context) {
-//     return handleRequest(context)
-// }
+export function onRequest(context) {
+    return handleRequest(context)
+}
 
 
-// async function handleRequest(context) {
-//     if (context.request.method === "POST") {
-//         try {
-//             // 解析 JSON 数据
-//             const body = await context.request.json();
-//             // 返回包含 user 参数的响应
-//             const encrypted = AesManager.encrypt(body);
-//             const req = {postData: encrypted}
-//             // return new Response(JSON.stringify(req));测试加密结果
-//             try {
-//                 const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
-//                     method: 'POST',
-//                     headers: {
-//                         'Content-Type': 'application/json; charset=UTF-8',
-//                     },
-//                     body: JSON.stringify({
-//                         req
-//                     })
-//                 });
-//
-//                 // 如果返回的响应是 JSON 格式
-//                 if (response.ok) {
-//                     // const data = await response.json();  // 获取响应的 JSON 数据
-//                     // return new Response(JSON.stringify(data), {
-//                     //     headers: { 'Content-Type': 'application/json' }
-//                     // });
-//                     const value = context.env.main
-//                     return new Response(JSON.stringify({value: "value"}))
-//                 } else {
-//                     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
-//                 }
-//             } catch (error) {
-//                 return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
-//             }
-//         } catch (error) {
-//             return new Response(JSON.stringify({err: "参数错误"}));
-//         }
-//     }
-// }
-//
+async function handleRequest(context) {
+    if (context.request.method === "POST") {
+        try {
+            // 解析 JSON 数据
+            const body = await context.request.json();
+            // 返回包含 user 参数的响应
+            const encrypted = AesManager.encrypt(body);
+            const req = {postData: encrypted}
+            // return new Response(JSON.stringify(req));测试加密结果
+            try {
+                const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: JSON.stringify({
+                        req
+                    })
+                });
+
+                // 如果返回的响应是 JSON 格式
+                if (response.ok) {
+                    const data = await response.json();  // 获取响应的 JSON 数据
+                    return new Response(JSON.stringify(data), {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                } else {
+                    return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+                }
+            } catch (error) {
+                return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+            }
+        } catch (error) {
+            return new Response(JSON.stringify({err: "参数错误"}));
+        }
+    }
+}
+
 
 
 
