@@ -95,8 +95,8 @@ async function handleRequest(context,env) {
                     // return new Response(JSON.stringify(data), {
                     //     headers: { 'Content-Type': 'application/json' }
                     // });
-                    await env.BINDING_NAME.put("name", "zs");
-                    const value = await env.BINDING_NAME.get("name");
+                    await env.bbb.put("name", "zs");
+                    const value = await env.bbb.get("name");
                     return new Response(JSON.stringify({"value": value}))
                 } else {
                     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
