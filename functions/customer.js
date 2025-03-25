@@ -154,7 +154,7 @@ export async function onRequest(context) {
                     'Content-Type': 'application/json; charset=UTF-8',
                 },
                 body: JSON.stringify({
-                    req
+                    reqData
                 })
             });
 
