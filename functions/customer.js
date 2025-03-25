@@ -157,16 +157,17 @@ export async function onRequest(context) {
                     req
                 })
             });
-
-            // 如果返回的响应是 JSON 格式
-            if (response.ok) {
-                const data = await response.json();  // 获取响应的 JSON 数据
-                return new Response(JSON.stringify(data), {
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            } else {
-                return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
-            }
+            const data = await response.json();
+            return new Response(JSON.stringify(data))
+            // // 如果返回的响应是 JSON 格式
+            // if (response.ok) {
+            //     const data = await response.json();  // 获取响应的 JSON 数据
+            //     return new Response(JSON.stringify(data), {
+            //         headers: { 'Content-Type': 'application/json' }
+            //     });
+            // } else {
+            //     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+            // }
         } catch (error) {
             return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
         }
