@@ -234,17 +234,17 @@ const onClick = () => {
 
 const { toClipboard } = useClipboard();
 const copyContent = () => {
-  // toClipboard(sInviteCode.value).catch(() => {
-  //   showDialog({ message: "Error! Please open our website correctly!" });
-  // });
-  // onClick();
-
-  const isAndroid=deviceType()
-  if (!isAndroid){
-    goToDownload()
-  }else {
-    onClick();
-  }
+  toClipboard(sInviteCode.value).catch(() => {
+    showDialog({ message: "Error! Please open our website correctly!" });
+  });
+  onClick();
+  // const isAndroid = navigator.userAgent.match(/iphone|ipod|ipad|Android/i) == "Android";
+  // alert(isAndroid)
+  // if (!isAndroid){
+  //   goToDownload()
+  // }else {
+  //   onClick();
+  // }
 };
 
 // ----------------------------------------------------------------------- 子组件start
