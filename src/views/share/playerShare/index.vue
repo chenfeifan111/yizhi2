@@ -240,13 +240,16 @@ const copyContent = () => {
   // });
   // onClick();
 
-  goToDownload()
-  // const isAndroid = navigator.userAgent.match(/iphone|ipod|ipad|Android/i) == "Android";
-  // if (!isAndroid){
-  //   goToDownload()
-  // }else {
-  //   onClick();
-  // }
+
+  const isAndroid = navigator.userAgent.match(/iphone|ipod|ipad|Android/i) == "Android";
+  if (!isAndroid){
+    goToDownload()
+  }else {
+    toClipboard(sInviteCode.value).catch(() => {
+      showDialog({ message: "Error! Please open our website correctly!" });
+    });
+    onClick();
+  }
 };
 
 // ----------------------------------------------------------------------- 子组件start
