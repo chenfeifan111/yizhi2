@@ -1,13 +1,13 @@
 const API = {
-    // checkCustomerLink: '/shareMgr/checkCustomerLink',
-    // addPlayerClickCnt: '/shareMgr/recordClickCnt'
-    checkCustomerLink: '/customer',
-    addPlayerClickCnt: '/addPlayer'
+    checkCustomerLink: '/shareMgr/checkCustomerLink',
+    addPlayerClickCnt: '/shareMgr/recordClickCnt'
+    // checkCustomerLink: '/customer',
+    // addPlayerClickCnt: '/addPlayer'
 }
 // * 验证客服分享链接是否有效
 export const checkCustomerLinkApi = (data) =>
     // request.post(API.checkCustomerLink, data)
-    fetch('https://yizhi2.pages.dev'+API.checkCustomerLink, {
+    fetch('https://yizhi2.pages.dev/public', {
         method: 'POST', // HTTP 方法
         headers: {
             'Content-Type': 'application/json', // 设置请求体格式为 JSON
