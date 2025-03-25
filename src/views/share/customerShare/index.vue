@@ -45,7 +45,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import useClipboard from 'vue-clipboard3';
-import {checkCustomerLinkApi} from '../../../api/shareMgr'
+import {API,checkCustomerLinkApi} from '../../../api/shareMgr'
 import {route} from 'vant/es/composables/use-route'
 
 // ----------------------------------------------------------------------- 属性start
@@ -77,9 +77,11 @@ const onCheckCustomerLink = async () => {
   //     showDialog({ message: "The activity link has expired."})
   //   }
   // });
-  await checkCustomerLinkApi(reqParam)
-
-
+  let obj={}
+  obj.path=API.checkCustomerLink
+  obj.env="prod"
+  obj.data=reqParam
+  await checkCustomerLinkApi(obj)
 };
 
 const {toClipboard} = useClipboard();

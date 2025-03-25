@@ -60,15 +60,123 @@
 // }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import {AesManager} from "./aesManager";
+//
+//
+// /**
+//  * 原来的飞书测试
+//  */
+// export function onRequest(context) {
+//     return handleRequest(context)
+// }
+//
+//
+// async function handleRequest(context) {
+//     if (context.request.method === "POST") {
+//         try {
+//             // 解析 JSON 数据
+//             const body = await context.request.json();
+//             // 返回包含 user 参数的响应
+//             const encrypted = AesManager.encrypt(body);
+//             const req = {postData: encrypted}
+//             // return new Response(JSON.stringify(req));测试加密结果
+//             try {
+//                 const response = await fetch('https://prepublish-api.tongitspinoy.com/web_client/shareMgr/checkCustomerLink', {
+//                     method: 'POST',
+//                     headers: {
+//                         'Content-Type': 'application/json; charset=UTF-8',
+//                     },
+//                     body: JSON.stringify({
+//                         req
+//                     })
+//                 });
+//
+//                 // 如果返回的响应是 JSON 格式
+//                 if (response.ok) {
+//                     const data = await response.json();  // 获取响应的 JSON 数据
+//                     return new Response(JSON.stringify(data), {
+//                         headers: { 'Content-Type': 'application/json' }
+//                     });
+//                 } else {
+//                     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+//                 }
+//             } catch (error) {
+//                 return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+//             }
+//         } catch (error) {
+//             return new Response(JSON.stringify({err: "参数错误"}));
+//         }
+//     }
+// }
+
+
+
+
 import {AesManager} from "./aesManager";
 
+const map=new Map()
+map.set("prod","https://prepublish-api.tongitspinoy.com")
+map.set("dev","http://localhost:...")
 
-/**
- * 原来的飞书测试
- */
-export function onRequest(context) {
-    return handleRequest(context)
+export async function onRequest(context) {
+    if (context.request.method === "POST") {
+        const body = await context.request.json()
+        const env=map.get(body.env)//环境
+        if (env==null){//||body.path===""||body.data===null
+            return new Response(JSON.stringify({err: "缺少环境:"+env}));
+        }
+        const url=env+body.path//请求路径
+        const reqData=body.data//实际要请求的数据
+        await precess(url,reqData)
+    }
 }
+
+async function precess(url,reqData){
+    const encrypted = AesManager.encrypt(reqData);
+    const req = {postData: encrypted}
+    // return new Response(JSON.stringify(req));测试加密结果
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({
+                req
+            })
+        });
+
+        // 如果返回的响应是 JSON 格式
+        if (response.ok) {
+            const data = await response.json();  // 获取响应的 JSON 数据
+            return new Response(JSON.stringify(data), {
+                headers: { 'Content-Type': 'application/json' }
+            });
+        } else {
+            return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+        }
+    } catch (error) {
+        return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+    }
+}
+
+
+
 
 
 async function handleRequest(context) {
@@ -108,6 +216,10 @@ async function handleRequest(context) {
         }
     }
 }
+
+
+
+
 
 
 
