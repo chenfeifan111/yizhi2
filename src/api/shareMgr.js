@@ -13,9 +13,9 @@ export const checkCustomerLinkApi = (data) =>
             'Content-Type': 'application/json', // 设置请求体格式为 JSON
         },
         body: JSON.stringify({
-            path:API.checkCustomerLink,
-            env:"prod",
-            data:data
+            "path":API.checkCustomerLink,
+            "env":"prod",
+            "data":data
         })
     })
         .then(response => response.json())  // 解析响应体中的 JSON 数据
