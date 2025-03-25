@@ -13,7 +13,7 @@ export const checkCustomerLinkApi = (data) =>
             'Content-Type': 'application/json', // 设置请求体格式为 JSON
         },
         body: JSON.stringify({
-            "path":API.checkCustomerLink,
+            "path":"/web_client"+API.checkCustomerLink,
             "env":"prod",
             "data":data
         })
