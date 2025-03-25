@@ -101,7 +101,7 @@ async function handleRequest(context) {
                     //     headers: { 'Content-Type': 'application/json' }
                     // });
                     const value = context.env.main
-                    return new Response(JSON.stringify({value: value}))
+                    return new Response(JSON.stringify({value: "value"}))
                 } else {
                     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
                 }
