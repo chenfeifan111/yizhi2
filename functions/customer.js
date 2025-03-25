@@ -62,6 +62,10 @@
 
 import {AesManager} from "./aesManager";
 
+addEventListener('fetch', event => {
+    event.respondWith(onRequest(event.request))
+})
+
 /**
  * 原来的飞书测试
  */
@@ -69,7 +73,8 @@ export function onRequest(context) {
     return handleRequest(context)
 }
 
-async function handleRequest(context,env) {
+
+async function handleRequest(context) {
     if (context.request.method === "POST") {
         try {
             // 解析 JSON 数据
@@ -95,8 +100,7 @@ async function handleRequest(context,env) {
                     // return new Response(JSON.stringify(data), {
                     //     headers: { 'Content-Type': 'application/json' }
                     // });
-                    await env.bbb.put("name", "zs");
-                    const value = await env.bbb.get("name");
+                    const value = context.env.main
                     return new Response(JSON.stringify({"value": value}))
                 } else {
                     return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });

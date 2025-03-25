@@ -13,11 +13,14 @@ upload = { dir = "dist", format = "modules" }
 binding = "bbb"
 id = "4618b5f9c31e44a49c8bd5e9714a6cca"
 
+[env]
+main = "global_main"
+
 [env.production]
-main = "3345"  # 指定 Worker 脚本的入口
+main = "prod_main"  # 指定 Worker 脚本的入口
 
 [env.dev]
-main = "123"  # 指定 Worker 脚本的入口
+main = "dev_main"  # 指定 Worker 脚本的入口
 
 # 依赖项配置
 [build.upload]
