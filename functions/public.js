@@ -146,9 +146,10 @@ export async function onRequest(context) {
 
         const encrypted = AesManager.encrypt(reqData);
         const req = {postData: encrypted}
-        // if (1==1){
-        //     return new Response(JSON.stringify(req));//测试加密结果
-        // }
+        if (1==1){
+            // return new Response(JSON.stringify(req));//测试加密结果
+            return new Response(JSON.stringify({"url":url}));//测试加密结果
+        }
         try {
             const response = await fetch(url, {
                 method: 'POST',
