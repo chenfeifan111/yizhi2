@@ -65,7 +65,7 @@ const API = {
 
 
 const postApi = (path, data) => {
-    return fetch('/', {
+    return fetch('/public', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
