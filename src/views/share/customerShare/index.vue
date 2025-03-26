@@ -50,19 +50,27 @@ import {route} from 'vant/es/composables/use-route'
 
 // ----------------------------------------------------------------------- 属性start
 
-const sCustomerId = ref();
-const sCustomerName = ref();
+const sCustomerId = ref('');
+const sCustomerName = ref('');
 // ----------------------------------------------------------------------- 属性end
 
 onMounted(() => {
-  onOpenThisPage();
+    onOpenThisPage();
 });
 
 const onOpenThisPage = () => {
-  sCustomerId.value = route.query?.customerId ? route.query.customerId : "";
-  sCustomerName.value = route.query?.customer ? route.query.customer : "";
+  // sCustomerId.value = route.query?.customerId ? route.query.customerId : "";
+  // sCustomerName.value = route.query?.customer ? route.query.customer : "";
+  const fullUrl = window.location.href
+  const hashPart = fullUrl.split('#')[1];
+  const queryString = hashPart.split('?')[1];
+  const urlParams = new URLSearchParams(queryString);
+  sCustomerId.value = urlParams.get('customerId') || '';
+  sCustomerName.value = urlParams.get('customer') || '';
   onCheckCustomerLink();
 };
+
+
 
 // 验证客服链接是否有效
 const onCheckCustomerLink = async () => {
