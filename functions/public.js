@@ -123,20 +123,70 @@
 // }
 
 
-export default {
-    async fetch(request, env, ctx) {
-        return new Response('Hello World!');
-    },
-};
+// export default {
+//     async fetch(request, env, ctx) {
+//         return new Response('Hello World!');
+//     },
+// };
 
 
 import {AesManager} from "./aesManager";
 
 const map=new Map()
+map.set("dev","http://localhost:6102")//换成本地后端接口
 map.set("prod","https://prepublish-api.tongitspinoy.com")
 map.set("prod2","....")
+map.set("prod3","....")
+
+export default {
+    async fetch(request, env, ctx) {
+        if (request.method==="POST"){
+            const body = await request.json()
+            const env=map.get(body.env)//环境
+            if (env==null){
+                return new Response(JSON.stringify({err: "缺少环境:"+env}));
+            }
+            const url=env+body.path//请求路径
+            const reqData=body.data//实际要请求的数据
+            const encrypted = AesManager.encrypt(reqData);
+            const req = {postData: encrypted}
+            // if (1==1){
+            //     // return new Response(JSON.stringify(req));//测试加密结果
+            // }
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: JSON.stringify({
+                        req
+                    })
+                });
+                // 如果返回的响应是 JSON 格式
+                if (response.ok) {
+                    const data = await response.json();  // 获取响应的 JSON 数据
+                    return new Response(JSON.stringify(data), {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                } else {
+                    return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+                }
+            } catch (error) {
+                return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+            }
+        }
+    },
+};
+
+
+
 
 export async function onRequest(context) {
+    return merge(context)
+}
+
+async function merge(context){
     if (context.request.method === "POST") {
         const body = await context.request.json()
         const env=map.get(body.env)//环境
@@ -145,8 +195,6 @@ export async function onRequest(context) {
         }
         const url=env+body.path//请求路径
         const reqData=body.data//实际要请求的数据
-        // await precess(url,reqData)
-
         const encrypted = AesManager.encrypt(reqData);
         const req = {postData: encrypted}
         // if (1==1){
@@ -176,8 +224,6 @@ export async function onRequest(context) {
         }
     }
 }
-
-
 
 
 
