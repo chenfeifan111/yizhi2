@@ -1,7 +1,6 @@
 <template>
   <div class="playerShare-scss" style='display: flex;display: -webkit-flex;flex-direction: column;align-items: center;'>
     <div style="margin-top: 8vh; width: 80%">
-      <button @click="getEnv">111</button>
       <van-button
           @click="copyContent"
           size="large"
@@ -60,7 +59,7 @@ onMounted(() => {
 });
 
 const getEnv=()=>{
-  console.log(process.env.ENV)
+  console.log(import.meta.env.VITE_ENV)
 }
 
 const onOpenThisPage = () => {
