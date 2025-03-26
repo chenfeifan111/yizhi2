@@ -134,7 +134,7 @@ import {AesManager} from "./aesManager";
 
 const map=new Map()
 map.set("prod","https://prepublish-api.tongitspinoy.com")
-map.set("dev","http://localhost:6102")
+map.set("prod2","....")
 
 export async function onRequest(context) {
     if (context.request.method === "POST") {
