@@ -1,1 +1,1 @@
-v = "prod"
+VITE_ENV = "prod"
