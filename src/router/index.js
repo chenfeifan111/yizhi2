@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import home from "../views/Home.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: "/:catchAll(.*)",
