@@ -66,28 +66,7 @@ const API = {
 
 
 
-// const postApi = (path, data) => {
-//     return fetch('/public', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             path: "/web_client" + path,
-//             env: import.meta.env.VITE_ENV,
-//             data: data
-//         })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//             return data;  // 可以返回数据，便于链式调用
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             throw error;  // 抛出错误，便于调用者处理
-//         });
-// }
+
 
 const postApi = (path, data) => {
     return axios.post('/public', {
@@ -95,14 +74,14 @@ const postApi = (path, data) => {
         env: import.meta.env.VITE_ENV,
         data: data
     })
-        .then(response => {
-            console.log(response.data);  // 打印响应数据
-            return response.data;  // 返回响应数据
-        })
-        .catch(error => {
-            console.error('Error:', error.response || error.message);  // 错误处理
-            throw error;  // 抛出错误，便于调用者处理
-        });
+        // .then(response => {
+        //     console.log(response.data);  // 打印响应数据
+        //     return response.data;  // 返回响应数据
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error.response || error.message);  // 错误处理
+        //     throw error;  // 抛出错误，便于调用者处理
+        // });
 };
 
 // * 验证客服分享链接是否有效

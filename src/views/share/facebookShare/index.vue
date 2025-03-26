@@ -77,7 +77,9 @@ const onRecordClickCnt = async (nOptype) => {
 	let reqParam = {
 		nRecordType: nOptype,
 	};
-	await addPlayerClickCntApi(reqParam);
+	await addPlayerClickCntApi(reqParam).then(res=>{
+    console.log(res.data)
+  });
 };
 
 const { toClipboard } = useClipboard();

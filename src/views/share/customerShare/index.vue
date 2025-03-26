@@ -77,7 +77,9 @@ const onCheckCustomerLink = async () => {
   //     showDialog({ message: "The activity link has expired."})
   //   }
   // });
-  await checkCustomerLinkApi(reqParam)
+  await checkCustomerLinkApi(reqParam).then(res=>{
+    console.log(res.data)
+  })
 };
 
 const {toClipboard} = useClipboard();
