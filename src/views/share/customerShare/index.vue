@@ -61,6 +61,7 @@ onMounted(() => {
 const onOpenThisPage = () => {
   sCustomerId.value = route.query?.customerId ? route.query.customerId : "";
   sCustomerName.value = route.query?.customer ? route.query.customer : "";
+  console.log(sCustomerId.value,sCustomerName.value)
   onCheckCustomerLink();
 };
 
