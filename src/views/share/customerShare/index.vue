@@ -67,8 +67,8 @@ const onOpenThisPage = () => {
 // 验证客服链接是否有效
 const onCheckCustomerLink = async () => {
   let reqParam = {
-    sCustomerId: sCustomerId.value || "1",
-    sCustomerName: sCustomerName.value || "2",
+    sCustomerId: sCustomerId.value || "",
+    sCustomerName: sCustomerName.value || "",
   };
   // await checkCustomerLinkApi(reqParam).then(res=>{
   //   console.log(res)
