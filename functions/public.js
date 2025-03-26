@@ -151,16 +151,16 @@ export async function onRequest(context) {
 async function merge(request){
     if (request.method === "POST") {
         const body = await request.json()
-        const env=map.get(body.env)//环境
-        if (env==null){//||body.path===""||body.data===null
-            return new Response(JSON.stringify({err: "缺少环境:"+env}));
+        const baseUrl=map.get(body.env)//环境
+        if (baseUrl==null){//||body.path===""||body.data===null
+            return new Response(JSON.stringify({err: "Missing environment:"+body.env}));
         }
-        const url=env+body.path//请求路径
+        const url=baseUrl+body.path//请求路径
         const reqData=body.data//实际要请求的数据
         const encrypted = AesManager.encrypt(reqData);
         const req = {postData: encrypted}
         // if (1==1){
-        //     // return new Response(JSON.stringify(req));//测试加密结果
+        //     return new Response(JSON.stringify(req));//测试加密结果
         // }
         try {
             const response = await fetch(url, {
@@ -168,9 +168,7 @@ async function merge(request){
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8',
                 },
-                body: JSON.stringify({
-                    req
-                })
+                body: JSON.stringify(req)
             });
             // 如果返回的响应是 JSON 格式
             if (response.ok) {
