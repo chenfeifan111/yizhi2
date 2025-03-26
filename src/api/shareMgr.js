@@ -14,7 +14,7 @@ export const checkCustomerLinkApi = (data) =>
         },
         body: JSON.stringify({
             "path":"/web_client"+API.checkCustomerLink,
-            "env":"prod",
+            "env":import.meta.env.VITE_ENV,
             "data":data
         })
     })
@@ -37,7 +37,7 @@ export const addPlayerClickCntApi = (data) =>
         // body: JSON.stringify(data)
         body: JSON.stringify({
             "path":"/web_client"+API.addPlayerClickCnt,
-            "env":"prod",
+            "env":import.meta.env.VITE_ENV,
             "data":data
         })
     })
