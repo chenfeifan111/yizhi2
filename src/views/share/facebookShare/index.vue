@@ -79,6 +79,9 @@ const onRecordClickCnt = async (nOptype) => {
 	};
 	await addPlayerClickCntApi(reqParam).then(res=>{
     console.log(res.data)
+  }).catch(error => {
+    console.error('Error:', error.response || error.message);  // 错误处理
+    throw error;  // 抛出错误，便于调用者处理
   });
 };
 
