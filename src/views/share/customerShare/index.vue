@@ -59,9 +59,9 @@ onMounted(() => {
   onOpenThisPage();
 });
 
-// const getEnv=()=>{
-//   console.log(env.)
-// }
+const getEnv=()=>{
+  console.log(process.env.ENV)
+}
 
 const onOpenThisPage = () => {
   sCustomerId.value = route.query?.customerId ? route.query.customerId : "";
