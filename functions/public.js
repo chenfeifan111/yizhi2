@@ -60,21 +60,6 @@
 // }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import {AesManager} from "./aesManager";
 //
 // const map=new Map()
@@ -132,11 +117,11 @@
 
 import {AesManager} from "./aesManager";
 
-const map=new Map()
-map.set("dev","http://localhost:6102")//换成本地后端接口
-map.set("prod","https://prepublish-api.tongitspinoy.com")
-map.set("prod2","....")
-map.set("prod3","....")
+const map = new Map()
+map.set("dev", "http://localhost:6102")//换成本地后端接口
+map.set("prod", "https://prepublish-api.tongitspinoy.com")
+map.set("prod2", "....")
+map.set("prod3", "....")
 
 export default {
     async fetch(request, env, ctx) {
@@ -148,15 +133,26 @@ export async function onRequest(context) {
     return merge(context.request)
 }
 
-async function merge(request){
+async function merge(request) {
+    if (request.method === "OPTIONS") {
+        return new Response(null, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Max-Age': '86400', // 预检结果缓存24小时
+            },
+            status: 204
+        });
+    }
     if (request.method === "POST") {
         const body = await request.json()
-        const baseUrl=map.get(body.env)//环境
-        if (baseUrl==null){//||body.path===""||body.data===null
-            return new Response(JSON.stringify({err: "Missing environment:"+body.env}));
+        const baseUrl = map.get(body.env)//环境
+        if (baseUrl == null) {//||body.path===""||body.data===null
+            return new Response(JSON.stringify({err: "Missing environment:" + body.env}));
         }
-        const url=baseUrl+body.path//请求路径
-        const reqData=body.data//实际要请求的数据
+        const url = baseUrl + body.path//请求路径
+        const reqData = body.data//实际要请求的数据
         const encrypted = AesManager.encrypt(reqData);
         const req = {postData: encrypted}
         // if (1==1){
@@ -173,14 +169,18 @@ async function merge(request){
             // 如果返回的响应是 JSON 格式
             if (response.ok) {
                 const data = await response.json();  // 获取响应的 JSON 数据
-                return new Response(JSON.stringify(data), {
-                    headers: { 'Content-Type': 'application/json' }
-                });
+                return withCors(new Response(JSON.stringify(data)));
+                // return new Response(JSON.stringify(data), {
+                //     headers: { 'Content-Type': 'application/json' }
+                // });
             } else {
-                return new Response(JSON.stringify({ err: "Server returned an error", status: response.status }), { status: response.status });
+                return withCors(new Response(JSON.stringify({
+                    err: "Server returned an error",
+                    status: response.status
+                }), {status: response.status}));
             }
         } catch (error) {
-            return new Response(JSON.stringify({ err: "Request failed", message: error.message }), { status: 500 });
+            return withCors(new Response(JSON.stringify({err: "Request failed", message: error.message}), {status: 500}));
         }
     }
 }
@@ -190,5 +190,10 @@ async function merge(request){
 
 
 
-
+function withCors(response) {
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+    return response;
+}
 
