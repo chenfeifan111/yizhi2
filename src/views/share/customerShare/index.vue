@@ -1,7 +1,6 @@
 <template>
   <div class="playerShare-scss" style='display: flex;display: -webkit-flex;flex-direction: column;align-items: center;'>
     <div style="margin-top: 8vh; width: 80%">
-      <button @click="getEnv">111</button>
       <van-button
           @click="copyContent"
           size="large"
@@ -58,10 +57,6 @@ const sCustomerName = ref();
 onMounted(() => {
   onOpenThisPage();
 });
-
-const getEnv=()=>{
-  console.log(import.meta.env.VITE_ENV)
-}
 
 const onOpenThisPage = () => {
   sCustomerId.value = route.query?.customerId ? route.query.customerId : "";
