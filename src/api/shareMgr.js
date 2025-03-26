@@ -65,7 +65,7 @@ const API = {
 
 
 const postApi = (path, data) => {
-    return fetch('https://yizhi2.pages.dev/public', {
+    return fetch('/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
